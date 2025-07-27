@@ -14,7 +14,9 @@ pipeline {
                     bat 'docker build -t %DOCKERHUB_CREDENTIALS_USR%/vehicle-service:latest .'
                     bat 'docker push %DOCKERHUB_CREDENTIALS_USR%/vehicle-service:latest'
                 }
-                bat 'kubectl apply -f vehicle-service/deployment/vehicle-service-deployment.yaml'
+                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                    bat 'kubectl apply -f vehicle-service/deployment/vehicle-service-deployment.yaml'
+                }
             }
         }
 
@@ -25,7 +27,9 @@ pipeline {
                     bat 'docker build -t %DOCKERHUB_CREDENTIALS_USR%/tracking-service:latest .'
                     bat 'docker push %DOCKERHUB_CREDENTIALS_USR%/tracking-service:latest'
                 }
-                bat 'kubectl apply -f tracking-service/deployment/tracking-service-deployment.yaml'
+                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                    bat 'kubectl apply -f tracking-service/deployment/tracking-service-deployment.yaml'
+                }
             }
         }
 
@@ -36,7 +40,9 @@ pipeline {
                     bat 'docker build -t %DOCKERHUB_CREDENTIALS_USR%/dashboard-service:latest .'
                     bat 'docker push %DOCKERHUB_CREDENTIALS_USR%/dashboard-service:latest'
                 }
-                bat 'kubectl apply -f dashboard-service/deployment/dashboard-service-deployment.yaml'
+                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                    bat 'kubectl apply -f dashboard-service/deployment/dashboard-service-deployment.yaml'
+                }
             }
         }
 
@@ -47,7 +53,9 @@ pipeline {
                     bat 'docker build -t %DOCKERHUB_CREDENTIALS_USR%/gateway-service:latest .'
                     bat 'docker push %DOCKERHUB_CREDENTIALS_USR%/gateway-service:latest'
                 }
-                bat 'kubectl apply -f gateway-service/deployment/gateway-service-deployment.yaml'
+                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                    bat 'kubectl apply -f gateway-service/deployment/gateway-service-deployment.yaml'
+                }
             }
         }
 
@@ -58,7 +66,9 @@ pipeline {
                     bat 'docker build -t %DOCKERHUB_CREDENTIALS_USR%/service-registry:latest .'
                     bat 'docker push %DOCKERHUB_CREDENTIALS_USR%/service-registry:latest'
                 }
-                bat 'kubectl apply -f service-registry/deployment/service-registry-deployment.yaml'
+                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                    bat 'kubectl apply -f service-registry/deployment/service-registry-deployment.yaml'
+                }
             }
         }
     }
