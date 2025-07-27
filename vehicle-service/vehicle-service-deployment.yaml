@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-service-deployment
+  labels:
+    app: vehicle-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vehicle-service
+  template:
+    metadata:
+      labels:
+        app: vehicle-service
+    spec:
+      containers:
+        - name: vehicle-service-container
+          image: your-dockerhub-username/vehicle-service:latest
+          ports:
+            - containerPort: 8081
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /actuator/healthgit
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
