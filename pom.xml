@@ -14,7 +14,7 @@
         <module>vehicle-service</module>
         <module>tracking-service</module>
         <module>dashboard-service</module>
-        <module>api-gateway</module>
+        <module>gateway-service</module>
         <module>service-registry</module>
     </modules>
 
