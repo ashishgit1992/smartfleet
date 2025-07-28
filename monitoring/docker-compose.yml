@@ -7,7 +7,10 @@ services:
     ports:
       - "9095:9090" # Localhost:9095 → Prometheus
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - type: bind
+        source: ./prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+
 
   grafana:
     build:
