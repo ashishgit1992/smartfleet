@@ -8,7 +8,7 @@ services:
       - "9095:9090" # Localhost:9095 → Prometheus
     volumes:
       - type: bind
-        source: ./prometheus.yml
+        source: ./prometheus/prometheus.yml
         target: /etc/prometheus/prometheus.yml
 
 
