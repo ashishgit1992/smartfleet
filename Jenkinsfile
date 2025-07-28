@@ -79,29 +79,15 @@ pipeline {
             }
         }
 
-        stage('Install Prometheus via Helm') {
+        stage('Install Prometheus & Grafana via Helm') {
             steps {
-                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
-                    bat '''
-                    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-                    helm repo update
-                    helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace
-                    '''
-                }
+                bat 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
+                bat 'helm repo update'
+                bat 'helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace'
+                bat 'helm install grafana prometheus-community/grafana --namespace monitoring'
             }
         }
 
-        stage('Install Grafana via Helm') {
-            steps {
-                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
-                    bat '''
-                    helm repo add grafana https://grafana.github.io/helm-charts
-                    helm repo update
-                    helm install grafana grafana/grafana --namespace monitoring
-                    '''
-                }
-            }
-        }
 
     }
 
