@@ -6,6 +6,13 @@ pipeline {
     }
 
     stages {
+
+        stage('Check CMD') {
+          steps {
+            bat 'echo CMD is working'
+          }
+        }
+
         stage('Build and Push vehicle-service') {
             steps {
                 dir('vehicle-service') {
