@@ -72,14 +72,30 @@ pipeline {
             }
         }
 
-        stage('Deploy Monitoring Stack') {
+        stage('Install Prometheus via Helm') {
             steps {
-                dir('monitoring') {
-                    bat 'docker-compose down || exit 0'
-                    bat 'docker-compose up -d'
+                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                    bat '''
+                    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+                    helm repo update
+                    helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace
+                    '''
                 }
             }
         }
+
+        stage('Install Grafana via Helm') {
+            steps {
+                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                    bat '''
+                    helm repo add grafana https://grafana.github.io/helm-charts
+                    helm repo update
+                    helm install grafana grafana/grafana --namespace monitoring
+                    '''
+                }
+            }
+        }
+
     }
 
     post {
