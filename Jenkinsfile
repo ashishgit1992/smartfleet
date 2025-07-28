@@ -6,6 +6,13 @@ pipeline {
     }
 
     stages {
+        stage('Check PATH') {
+          steps {
+            bat 'echo PATH=%PATH%'
+            bat 'where cmd'
+            bat 'where helm'
+          }
+        }
 
         stage('Check CMD') {
           steps {
