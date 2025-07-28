@@ -6,20 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Check PATH') {
-          steps {
-            bat 'echo PATH=%PATH%'
-            bat 'where cmd'
-            bat 'where helm'
-          }
-        }
-
-        stage('Check CMD') {
-          steps {
-            bat 'echo CMD is working'
-          }
-        }
-
         stage('Build and Push vehicle-service') {
             steps {
                 dir('vehicle-service') {
@@ -86,16 +72,18 @@ pipeline {
             }
         }
 
-        stage('Install Prometheus & Grafana via Helm') {
-            steps {
-                bat 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
-                bat 'helm repo update'
-                bat 'helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace'
-                bat 'helm install grafana prometheus-community/grafana --namespace monitoring'
-            }
-        }
-
-
+       stage('Install Prometheus & Grafana via Helm') {
+           steps {
+               withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                   bat '''
+                       helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+                       helm repo update
+                       helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace
+                       helm install grafana prometheus-community/grafana --namespace monitoring
+                   '''
+               }
+           }
+       }
     }
 
     post {
