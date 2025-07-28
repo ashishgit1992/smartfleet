@@ -1,0 +1,13 @@
+{
+  "__inputs": [],
+  "__elements": [],
+  "title": "SmartFleet Monitoring",
+  "panels": [],
+  "timezone": "browser",
+  "schemaVersion": 26,
+  "version": 1,
+  "templating": {
+    "list": []
+  },
+  "refresh": "5s"
+}

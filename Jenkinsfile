@@ -72,24 +72,14 @@ pipeline {
             }
         }
 
-        stage('Deploy Prometheus') {
+        stage('Deploy Monitoring Stack') {
             steps {
                 dir('monitoring') {
-                    bat 'docker build -t prometheus-custom .'
-                    bat 'docker run -d --name prometheus --network host -p 9095:9090 prometheus-custom'
+                    bat 'docker-compose down || exit 0'
+                    bat 'docker-compose up -d'
                 }
             }
         }
-
-        stage('Deploy Grafana') {
-            steps {
-                dir('monitoring') {
-                    bat 'docker build -t grafana-custom .'
-                    bat 'docker run -d --name grafana --network host -p 3000:3000 grafana-custom'
-                }
-            }
-        }
-
     }
 
     post {
