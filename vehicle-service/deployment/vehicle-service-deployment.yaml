@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
-              path: /actuator/healthgit
+              path: /actuator/health
               port: 8081
             initialDelaySeconds: 10
             periodSeconds: 5
