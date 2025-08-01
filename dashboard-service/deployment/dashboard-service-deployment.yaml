@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dashboard-service-container
-          image: your-dockerhub-username/dashboard-service:latest
+          image: ashishgit1992/dashboard-service:latest
           ports:
             - containerPort: 8083
           imagePullPolicy: Always

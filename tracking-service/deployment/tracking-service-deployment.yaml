@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: tracking-service-container
-          image: your-dockerhub-username/tracking-service:latest
+          image: ashishgit1992/tracking-service:latest
           ports:
             - containerPort: 8082
           imagePullPolicy: Always

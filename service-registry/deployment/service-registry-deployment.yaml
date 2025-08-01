@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: service-registry-container
-          image: your-dockerhub-username/service-registry:latest
+          image: ashishgit1992/service-registry:latest
           ports:
             - containerPort: 8761
           imagePullPolicy: Always
