@@ -79,12 +79,20 @@ pipeline {
                         helm repo add prometheus-community https://prometheus-community.github.io/helm-charts || echo "Repo already added"
                         helm repo add grafana https://grafana.github.io/helm-charts || echo "Grafana repo already added"
                         helm repo update
-                        helm upgrade --install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace
-                        helm upgrade --install grafana grafana/grafana --namespace monitoring --create-namespace
+
+                        helm upgrade --install prometheus prometheus-community/prometheus ^
+                            --namespace monitoring ^
+                            --create-namespace ^
+                            --set nodeExporter.enabled=false
+
+                        helm upgrade --install grafana grafana/grafana ^
+                            --namespace monitoring ^
+                            --create-namespace
                     '''
                 }
             }
         }
+
 
 
     }
