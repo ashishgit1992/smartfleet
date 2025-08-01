@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: vehicle-service-container
-          image: ashishgit1992/vehicle-service:latest
+          image: 5718858/vehicle-service:latest
           ports:
             - containerPort: 8081
           imagePullPolicy: Always

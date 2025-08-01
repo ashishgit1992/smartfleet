@@ -1,5 +1,6 @@
 package com.smartfleet.vehicle_service.logging;
 
+import lombok.NonNull;
 import org.slf4j.MDC;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,6 @@ import java.util.UUID;
 @Component
 public class LoggingFilter implements WebFilter {
     private static final String TRACE_ID_HEADER = "X-Trace-Id";
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();

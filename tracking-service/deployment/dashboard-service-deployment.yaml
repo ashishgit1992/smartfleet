@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dashboard-service-container
-          image: ashishgit1992/dashboard-service:latest
+          image: 5718858/dashboard-service:latest
           ports:
             - containerPort: 8083
           imagePullPolicy: Always

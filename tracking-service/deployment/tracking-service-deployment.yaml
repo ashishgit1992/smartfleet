@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: tracking-service-container
-          image: ashishgit1992/tracking-service:latest
+          image: 5718858/tracking-service:latest
           ports:
             - containerPort: 8082
           imagePullPolicy: Always
